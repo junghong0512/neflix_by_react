@@ -24,7 +24,7 @@ export const movieApi = {
     })
 };
 
-export default tvApi = {
+export const tvApi = {
     topRated: () => api.get("tv/top_rated"),
     popular: () => api.get("tv/popular"),
     airingToday: () => api.get("tv/airing_today"),
