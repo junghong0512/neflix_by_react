@@ -11,7 +11,7 @@ export default () => {
 
     const [result, setResult] = useState(null);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [isMovie, setIsMovie] = useState(pathname.includes("/movie/"));
     
     useEffect(async () => {
@@ -34,8 +34,6 @@ export default () => {
             setLoading(false);
         }
     }, [])
-
-    console.log(result)
 
     return <DetailPresenter 
         result={result}
