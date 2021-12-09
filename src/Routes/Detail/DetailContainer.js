@@ -1,19 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import DetailPresenter from "./DetailPresenter";
+import { moviesApi, tvApi } from "api";
 
-export default class extends React.Component {
-    state = {
-        result: null,
-        error: null,
-        loading: true,
-    }
 
-    render() {
-        const { result, error, loading } = this.state;
-        return <DetailPresenter 
-            result={result}
-            error={error}
-            loading={loading}
-        />
-    }
+export default () => {
+    let { pathname } = useLocation();
+    let navigate = useNavigate();
+    let { id } = useParams();
+
+    const [result, setResult] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(null);
+    const [isMovie, setIsMovie] = useState(pathname.includes("/movie/"));
+    
+    useEffect(async () => {
+        const parsedId = parseInt(id);
+        setIsMovie(pathname.includes("/movie/"));
+        if(isNaN(parsedId)) {
+            navigate("/");
+        }
+        let res = null;
+        try {
+            if(isMovie) {
+                ({ data: res }  = await moviesApi.movieDetail(parsedId));
+            } else {
+                ({ data: res } = await tvApi.showDetail(parsedId));
+            }
+        } catch (error) {
+            setError("Can't find anything.")
+        } finally {
+            setResult(res);
+            setLoading(false);
+        }
+    }, [])
+
+    console.log(result)
+
+    return <DetailPresenter 
+        result={result}
+        error={error}
+        loading={loading}
+    />
 }
