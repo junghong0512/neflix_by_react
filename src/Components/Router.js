@@ -7,14 +7,14 @@ import Search from "Routes/Search";
 import Detail from "Routes/Detail";
 
 export default () => (
-    <BrowserRouter>
-        <Header />
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="tv" element={<TV />} />
-            <Route path="search" element={<Search />} />
-            <Route path="/movie/:id" element={<Detail />} />
-            <Route path="/show/:id" element={<Detail />} />
-        </Routes>
-    </BrowserRouter>
-)
+  <BrowserRouter>
+    <Header />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="tv" element={<TV />} />
+      <Route path="search" element={<Search />} />
+      <Route path="/movie/:id" element={<Detail />} />
+      <Route path="/show/:id" element={<Detail />} />
+    </Routes>
+  </BrowserRouter>
+);
